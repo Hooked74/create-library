@@ -1,0 +1,14 @@
+dist: trusty
+language: node_js
+node_js:
+  - 12
+deploy:
+  provider: npm
+  email: novikovio74@gmail.com
+  skip_cleanup: true
+  tag: latest
+  on:
+    branch: master
+    repo: Hooked74/create-library
+  api_key:
+    secure: Z2ZbjkB8cafilTu15y222z18O6Cn0SHiVETDedHtSHmhTtvPx52eFgmDwGNwFM2dfxjj7LvtdlkN8DxyGmrMwfbueZ1tZr6xqG2bxbx+jufcyBkVQL4vcaroTaw44F1C9GGdUl819i/f2I3CG/l+f2d4CnHxXaAnJZw7M7j7Qkqu9Jg5yvWB54v9Zhzphf5azMI4qcUwGsb35/vm4gGBXGREmVixf2ysS+Hs2CVTFJee+3b+o03o+ytwX5YRJNJyP+J8h6D+4nIFr49rnD0kTHGvufhldSs8nEWLYDr8Fj3iF8lO7W3iUjfUnsWKGgC47J8ClhUgga7errfMPfGW2mpxCxceLZXISNviObMJCvGTPkExk2FdrgqJPvamXz/ytutIQOMrmJp84nm2+chjWw77rn2xjPLuNjPzonlFYtUEJ65ErStB67F08UiV6bVe3OymSw0H2g5d7fNdIFZBYYFZpcTlfhG3zU2SJIHlEI5jsiTLN+x8B6iE9WuIk33sPVXJPsB2i9VSombmC6UxOFB8sZe3Bf6HKDc4WmfUV3YXBZCleJrM86NWOE/keI9pD8ZdLd3ib17iDC9OLjpk9+ZGeoPzhWbqBUtf1ua3NcnGges4LsqoGJBxFsBkg3B6UxID7fTCAvjBdznNLv12AUxnJatSWkIzqleyVdfYaTE=
