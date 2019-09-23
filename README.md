@@ -6,7 +6,7 @@
 
 <br />
 
-<div style="text-align: center;"><img src="https://i.imgur.com/nm9UcDY.png" alt="tools" height="200"/></div>
+<div style="text-align: center;" align="center"><img src="https://i.imgur.com/nm9UcDY.png" alt="tools" height="200"/></div>
 
 This application generates a starter library kit.
 
