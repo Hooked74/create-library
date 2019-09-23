@@ -24,9 +24,6 @@
   "sideEffects": false,
   "author": "$[author] <$[email]>",
   "license": "MIT",
-  "files": [
-    "/dist"
-  ],
   "engines": {
     "node": ">=10",
     "npm": ">=6"
