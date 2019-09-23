@@ -28,10 +28,10 @@ npx @hooked74/create-library [<name>]
 
 ## Command Options
 
-**-c, --config <json|file>**
+**-c, --config <json|file>** \
 Transfer partial or full configuration in json format or in file format for library generation.
 
-**-f, --force**
+**-f, --force** \
 Generate library with default configuration options (from *default-config.json* file).
 
 ## Configuration
