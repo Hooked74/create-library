@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/create-library",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
@@ -37,7 +37,12 @@
     "chalk": "^2.4.2",
     "commander": "^3.0.1",
     "inquirer": "^7.0.0",
+    "move-cli": "^1.2.1",
+    "path-exists-cli": "^1.0.0",
     "prettyjson": "^1.2.1",
     "simple-output": "^1.0.1"
+  },
+  "scripts": {
+    "postinstall": "path-exists template/.npmignore && move-cli template/.npmignore template/.gitignore || echo \"template/.npmignore doesn't exist\""
   }
 }
