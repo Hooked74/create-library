@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/create-library",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
@@ -14,7 +14,7 @@
   "license": "MIT",
   "files": [
     "/src",
-    "/templace/**"
+    "/templace/**/*"
   ],
   "engines": {
     "node": ">=10",
