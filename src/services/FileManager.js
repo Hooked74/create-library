@@ -43,7 +43,7 @@ module.exports = class FileManager {
           this.makeDir(outFilePath);
           message(`${chalk.cyan(outFilePath)} directory created`);
         } else {
-          writeFileSync(outFilePath, replace(readFileSync(filePath).toString()), fileName);
+          writeFileSync(outFilePath, replace(readFileSync(filePath).toString(), fileName));
           message(`Copied ${chalk.cyan(fileName)} file to ${chalk.cyan(outFilePath)}`);
         }
       }
