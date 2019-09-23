@@ -1,18 +1,20 @@
 {
   "name": "@hooked74/create-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Set up a library by running one command",
-  "scripts": {},
   "keywords": [
     "library",
     "create",
     "typescript",
-    "boilerplate"
+    "boilerplate",
+    "rollup",
+    "react"
   ],
   "author": "Igor Novikov <novikovio74@gmail.com>",
   "license": "MIT",
   "files": [
-    "/dist"
+    "/src",
+    "/template"
   ],
   "engines": {
     "node": ">=10",
@@ -30,5 +32,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^3.0.1",
+    "inquirer": "^7.0.0",
+    "prettyjson": "^1.2.1",
+    "simple-output": "^1.0.1"
   }
 }

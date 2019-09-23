@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-react-a11y",
+    "tslint-react-hooks",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": ["./config/**", "./node_modules/**", "./coverage/**", "./public/**"]
+  },
+  "rules": {
+    "curly": false,
+    "no-namespace": false,
+    "no-reference": false,
+    "no-empty-interface": false,
+    "object-literal-sort-keys": false,
+    "no-unused-expression": true,
+    "no-console": {
+      "severity": "warning",
+      "options": ["log", "error", "debug", "info", "time", "timeEnd", "trace"]
+    },
+    "typedef": [
+      true,
+      "call-signature",
+      "property-declaration",
+      "variable-declaration",
+      "object-destructuring",
+      "array-destructuring",
+      "arrow-parameter",
+      "parameter",
+      "member-variable-declaration"
+    ],
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "no-shadowed-variable": false,
+    "one-variable-per-declaration": false,
+    "no-bitwise": false,
+    "forin": false
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "name": "$[package]",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "cross-env CI=true react-scripts test --bail --colors --coverage --passWithNoTests",
+    "test:staged": "cross-env CI=true react-scripts test --bail --colors --passWithNoTests --findRelatedTests",
+    "test:watch": "react-scripts test",
+    "clean": "rimraf dist && rimraf example",
+    "storybook": "start-storybook",
+    "build": "npm run clean && npm run build:lib && npm run build:types && npm run build:size && npm run build:storybook",
+    "build:lib": "cross-env NODE_ENV=production rollup -c",
+    "build:types": "project-tools types && npm run prettier:types && npm run lint:types",
+    "build:size": "project-tools size",
+    "build:storybook": "build-storybook -c .storybook -o example",
+    "prettier": "prettier --write",
+    "prettier:types": "prettier --write \"dist/**/*.d.ts\"",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:ts": "tslint --fix -p tsconfig.json -c tslint.json",
+    "lint:css": "stylelint \"stories/**/*.{js,jsx}\"",
+    "lint:types": "tslint --fix -p tsconfig.types.json -c tslint.compile.json dist/**/*.d.ts"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "author": "$[author] <$[email]>",
+  "license": "MIT",
+  "files": [
+    "/dist"
+  ],
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "main": "dist/$[name].cjs.js",
+  "module": "dist/$[name].esm.js",
+  "jsnext:main": "dist/$[name].esm.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/$[repo].git"
+  },
+  "bugs": {
+    "url": "https://github.com/$[repo]/issues"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs3": "^7.6.0"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@atlaskit/css-reset": "^5.0.8",
+    "@atlaskit/theme": "^9.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@emotion/core": "^10.0.17",
+    "@emotion/styled": "^10.0.17",
+    "@hooked74/project-tools": "^1.0.8",
+    "@storybook/react": "^5.2.1",
+    "@storybook/theming": "^5.2.1",
+    "@svgr/rollup": "^4.3.2",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/storybook__react": "^4.0.2",
+    "babel-plugin-emotion": "^10.0.19",
+    "cross-env": "^6.0.0",
+    "custom-tslint-formatters": "^2.4.0",
+    "dotenv": "^8.1.0",
+    "emotion": "^10.0.17",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.3.0",
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.2",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.21.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-license": "^0.12.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-strip": "^1.2.2",
+    "rollup-plugin-tslint": "^0.2.2",
+    "rollup-plugin-uglify": "^6.0.3",
+    "rollup-plugin-url": "^2.2.2",
+    "styled-components": "^4.3.2",
+    "stylelint": "^11.0.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.8.0",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-loader": "^3.5.4",
+    "tslint-react": "^4.1.0",
+    "tslint-react-a11y": "^1.0.0",
+    "tslint-react-hooks": "^2.2.1",
+    "typescript": "^3.6.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run prettier --",
+      "npm run lint --",
+      "npm run test:staged --",
+      "git add"
+    ],
+    "*.{json,scss,css,md}": [
+      "npm run prettier --",
+      "git add"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
