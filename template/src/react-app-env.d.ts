@@ -7,6 +7,7 @@ type float = number;
 type ufloat = number;
 
 type KeysOfUnion<T> = T extends any ? keyof T : never;
+type PickField<T, K extends keyof T> = T extends any ? T[K] : never;
 
 type PromiseResolve = (value?: void | PromiseLike<void> | undefined) => void;
 type PromiseReject = (reason?: any) => void;

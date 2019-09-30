@@ -1,9 +1,10 @@
+/// <reference path="../../src/react-app-env.d.ts" />
+
 import { colors } from "@atlaskit/theme";
-import styled, { CreateStyledComponentIntrinsic } from "@emotion/styled";
-import { Theme } from "@storybook/theming";
+import styled, { StyledTags } from "@emotion/styled";
 import React from "react";
 
-const GlobalStyles: ReturnType<CreateStyledComponentIntrinsic<"div", {}, Theme>> = styled.div`
+const GlobalStyles: ReturnType<PickField<StyledTags<any>, "div">> = styled.div`
   background-color: ${colors.N0};
   min-height: 100vh;
   color: ${colors.N900};

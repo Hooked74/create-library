@@ -1,8 +1,7 @@
-import styled, { CreateStyledComponentIntrinsic } from "@emotion/styled";
-import { Theme } from "@storybook/theming";
+import styled, { StyledTags } from "@emotion/styled";
 import React, { PureComponent } from "react";
 
-const Button: ReturnType<CreateStyledComponentIntrinsic<"button", {}, Theme>> = styled.button`
+const Button: ReturnType<PickField<StyledTags<any>, "button">> = styled.button`
   color: turquoise;
 `;
 
