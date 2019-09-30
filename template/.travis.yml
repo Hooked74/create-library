@@ -2,11 +2,16 @@ dist: trusty
 language: node_js
 node_js:
   - 12
+  - 11
+  - 10
 cache:
   directories:
     - node_modules
 install:
   - npm ci
+before_script:
+  - npm outdate
+  - npm audit
 script:
   - npm test
   - npm i -g codecov
