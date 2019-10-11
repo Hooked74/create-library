@@ -1,9 +1,10 @@
 {
   "extends": [
     "tslint:recommended",
-    "tslint-react",
-    "tslint-react-a11y",
-    "tslint-react-hooks",
+    <% if (react) { %>"tslint-react",<% } %>
+    <% if (react) { %>"tslint-react-a11y",<% } %>
+    <% if (react) { %>"tslint-react-hooks",<% } %>
+    <% if (cypress) { %>"tslint-plugin-cypress",<% } %>
     "tslint-config-prettier"
   ],
   "linterOptions": {

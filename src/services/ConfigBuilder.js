@@ -3,13 +3,16 @@ const {
   getAbbreviationFromString,
   splitAndCapitalize
 } = require("../utils/string");
-const { promptInput } = require("../utils/prompt");
+const { promptInput, promptConfirm } = require("../utils/prompt");
 const chalk = require("chalk");
 
 module.exports = class ConfigBuilder {
   constructor(config, defaultConfig) {
     this.defaultConfig = defaultConfig || {};
     this.config = Object.assign({}, config);
+    this.reactBuilt = false;
+    this.storybookBuilt = false;
+    this.cypressBuilt = false;
   }
 
   async buildName() {
@@ -89,7 +92,9 @@ module.exports = class ConfigBuilder {
       );
     }
 
-    this.config.repo = `${this.config.repoAuthor}/${this.config.repoName || this.config.name}`;
+    if (!this.config.repoName) this.config.repoName = this.config.name;
+
+    this.config.repo = `${this.config.repoAuthor}/${this.config.repoName}`;
   }
 
   async buildEncodedRepo() {
@@ -118,6 +123,51 @@ module.exports = class ConfigBuilder {
     this.config.namespaceAlias =
       (this.config.typePrefix ? `${this.config.typePrefix}_` : "") +
       getAbbreviationFromString(this.config.name);
+  }
+
+  async buildReact() {
+    if (!this.reactBuilt) {
+      const defaultValue = true;
+      this.config.react = this.config.extended
+        ? await promptConfirm(`Will ${chalk.magenta("react")} be in the app?`, {
+            default: defaultValue
+          })
+        : typeof this.config.react === "boolean"
+        ? this.config.react
+        : defaultValue;
+
+      this.reactBuilt = true;
+    }
+  }
+
+  async buildStorybook() {
+    if (!this.storybookBuilt) {
+      const defaultValue = true;
+      this.config.storybook = this.config.extended
+        ? await promptConfirm(`Will ${chalk.magenta("storybook")} be in the app?`, {
+            default: defaultValue
+          })
+        : typeof this.config.storybook === "boolean"
+        ? this.config.storybook
+        : defaultValue;
+
+      this.storybookBuilt = true;
+    }
+  }
+
+  async buildCypress() {
+    if (!this.cypressBuilt) {
+      const defaultValue = true;
+      this.config.cypress = this.config.extended
+        ? await promptConfirm(`Will ${chalk.magenta("cypress")} be in the app?`, {
+            default: defaultValue
+          })
+        : typeof this.config.cypress === "boolean"
+        ? this.config.cypress
+        : defaultValue;
+
+      this.cypressBuilt = true;
+    }
   }
 
   getConfig() {

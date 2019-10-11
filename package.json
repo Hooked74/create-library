@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/create-library",
-  "version": "1.0.11",
+  "version": "2.0.0",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
@@ -37,8 +37,10 @@
     "chalk": "^2.4.2",
     "commander": "^3.0.2",
     "inquirer": "^7.0.0",
+    "lodash": "^4.17.15",
     "move-cli": "^1.2.1",
     "path-exists-cli": "^1.0.0",
+    "prettier": "^1.18.2",
     "prettyjson": "^1.2.1",
     "simple-output": "^1.0.1"
   },

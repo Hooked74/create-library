@@ -1,1 +1,1 @@
-/// <reference path="../src/react-app-env.d.ts" />
+/// <reference path="../src/common.d.ts" />

@@ -65,6 +65,7 @@ jspm_packages/
 /dist
 /dist-server
 /metrics
+cypress/videos
 
 # IntelliJ project files
 .idea

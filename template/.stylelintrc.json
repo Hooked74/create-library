@@ -1,15 +1,15 @@
 {
-  "processors": [
+  <% if (react) { %>"processors": [
     [
       "stylelint-processor-styled-components",
       {
         "moduleName": "@emotion/styled"
       }
     ]
-  ],
+  ],<% } %>
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-styled-components",
+    <% if (react) { %>"stylelint-config-styled-components",<% } %>
     "stylelint-config-prettier"
   ],
   "rules": {

@@ -1,40 +1,60 @@
 const { resolve } = require("path");
 
-const useTSLint = config => {
-  const eslintLoaderIndex = config.module.rules.findIndex(
-    rule => rule.use && rule.use[0] && rule.use[0].loader && rule.use[0].loader.includes("eslint")
-  );
-
-  if (~eslintLoaderIndex) {
-    config.module.rules[eslintLoaderIndex].test = /\.(js|mjs|jsx)$/;
-    config.module.rules.splice(eslintLoaderIndex, 0, {
-      test: /\.tsx?$/,
-      enforce: "pre",
-      loader: "tslint-loader",
-      options: {
-        formattersDirectory: "node_modules/custom-tslint-formatters/formatters",
-        formatter: "grouped",
-        emitErrors: true
-      }
-    });
+const findLoader = loaderName => rule => {
+  if (
+    rule &&
+    rule.use &&
+    rule.use[0] &&
+    rule.use[0].loader &&
+    rule.use[0].loader.includes(loaderName)
+  ) {
+    return rule.use[0];
+  } else if (rule && rule.loader && rule.loader.includes(loaderName)) {
+    return rule;
   }
+};
+
+const useTSLint = config => {
+  const eslintFindLoader = findLoader("eslint");
+  for (const rule of config.module.rules) {
+    const eslintLoader = eslintFindLoader(rule);
+    if (eslintLoader) {
+      eslintLoader.test = /\.(mjs|jsx?)$/;
+      break;
+    }
+  }
+
+  const tslintFindLoader = findLoader("tslint");
+  for (const [i, rule] of config.module.rules.entries()) {
+    const tslintLoader = tslintFindLoader(rule);
+    if (tslintLoader) {
+      tslintLoader.splice(i, 1);
+      break;
+    }
+  }
+
+  config.module.rules.unshift({
+    test: /\.tsx?$/,
+    enforce: "pre",
+    loader: "tslint-loader",
+    options: {
+      formattersDirectory: "node_modules/custom-tslint-formatters/formatters",
+      formatter: "grouped",
+      emitErrors: true
+    }
+  });
 
   return config;
 };
 
 const useTypescript = config => {
-  const babelLoader = config.module.rules.find(
-    (rule, i) => rule && rule.loader && rule.loader.includes("babel")
-  );
+  const findBabelLoader = findLoader("babel");
+  for (const rule of config.module.rules) {
+    const babelLoader = findBabelLoader(rule);
 
-  if (babelLoader) {
-    const { presets } = babelLoader.options;
-    const reactAppPresetIndex = presets.findIndex(preset => preset.includes("react-app"));
-
-    babelLoader.include = [babelLoader.include, resolve(".storybook"), resolve("stories")];
-
-    if (~reactAppPresetIndex) {
-      presets.splice(reactAppPresetIndex, 1, [presets[reactAppPresetIndex], { typescript: true }]);
+    if (babelLoader) {
+      rule.include = [rule.include, resolve(".storybook"), resolve("stories")];
+      rule.test = /\.(mjs|jsx?|tsx?)$/;
     }
   }
 

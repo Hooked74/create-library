@@ -8,14 +8,14 @@
       }
     ],
     "@babel/preset-typescript",
-    "@babel/preset-react"
+    <% if (react) { %>"@babel/preset-react"<% } %>
   ],
   "plugins": [
     "babel-plugin-macros",
     [
       "@babel/plugin-transform-destructuring",
       {
-        "loose": false,
+        "loose": false<% if (react) { %>,
         "selectiveLoose": [
           "useState",
           "useEffect",
@@ -28,12 +28,12 @@
           "useLayoutEffect",
           "useDebugValue"
         ]
-      }
+        <% } %>}
     ],
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-syntax-dynamic-import",
-    "babel-plugin-emotion"
+    "@babel/plugin-syntax-dynamic-import"<% if (react) { %>,
+    "babel-plugin-emotion"<% } %>
   ]
 }

@@ -1,16 +1,14 @@
 import React from "react";
-import { addParameters, configure, addDecorator } from "@storybook/react";
+import { addParameters, configure, addDecorator } from "@storybook/<%= react ? "react" : "html" %>";
 import { create } from "@storybook/theming";
-import GlobalStylesDecorator from "./decorator/global-styles";
+import GlobalStylesDecorator from "./decorator/global-styles.<%= react ? "tsx" : "ts" %>";
 
 // adding css reset - storybook includes a css loader
-import "@atlaskit/css-reset";
-import { colors } from "@atlaskit/theme";
 import { version } from "../package.json";
 
 const theme = create({
-  brandName: "$[name]",
-  brandUrl: "https://github.com/$[repo]"
+  brandName: "<%= name %>",
+  brandUrl: "https://github.com/<%= repo %>"
 });
 
 addParameters({
@@ -38,7 +36,7 @@ const table = Object.prototype.hasOwnProperty.call(console, "table") ? console.t
 
 console.log("environment");
 table([
-  ["$[name] version", version],
+  ["<%= name %> version", version],
   ["react version", React.version],
   ["process.env.NODE_ENV", process.env.NODE_ENV]
 ]);

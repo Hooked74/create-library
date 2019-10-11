@@ -7,10 +7,9 @@ module.exports = class ConfigManager {
   constructor(program) {
     this.program = program;
 
-    const defaultConfig = this.getDefaultConfig();
-    const configFromCli = this.getConfigFromCli();
+    const config = Object.assign({}, this.getDefaultConfig(), this.getConfigFromCli());
     this.configBuilder = new ConfigBuilder(
-      this.wrapConfig(defaultConfig || configFromCli),
+      this.extendConfigWithProgram(config),
       this.getDefaultConfig(true)
     );
   }
@@ -43,11 +42,13 @@ module.exports = class ConfigManager {
     return null;
   }
 
-  wrapConfig(config) {
+  extendConfigWithProgram(config) {
     config || (config = {});
 
     const name = this.program.args[0];
     if (name) config.name = name;
+
+    config.extended = !!this.program.extended;
 
     return config;
   }
@@ -63,6 +64,9 @@ module.exports = class ConfigManager {
     await this.configBuilder.buildEncodedRepo();
     await this.configBuilder.buildNamespace();
     await this.configBuilder.buildNamespaceAlias();
+    await this.configBuilder.buildReact();
+    await this.configBuilder.buildStorybook();
+    await this.configBuilder.buildCypress();
   }
 
   getConfig() {

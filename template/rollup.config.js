@@ -43,7 +43,7 @@ const getBabelOptions = ({ useESModules }) => ({
 });
 
 const commonjsArgs = {
-  include: "node_modules/**",
+  include: "node_modules/**"<% if (react) { %>,
   namedExports: {
     "node_modules/react/index.js": [
       "createContext",
@@ -55,7 +55,7 @@ const commonjsArgs = {
     ],
     "node_modules/react-dom/index.js": ["render", "hydrate"]
   }
-};
+<% } %>};
 
 export default [
   // Universal module definition (UMD) build
@@ -63,10 +63,10 @@ export default [
   {
     input,
     output: {
-      file: "dist/$[name].js",
+      file: "dist/<%= name %>.js",
       format: "umd",
-      name: "$[capName]",
-      globals: { react: "React", "react-dom": "ReactDOM" },
+      name: "<%= capName %>",
+      <% if (react) { %>globals: { react: "React", "react-dom": "ReactDOM" },<% } %>
       sourcemap: true,
       exports: "named"
     },
@@ -88,10 +88,10 @@ export default [
   {
     input,
     output: {
-      file: "dist/$[name].min.js",
+      file: "dist/<%= name %>.min.js",
       format: "umd",
-      name: "$[capName]",
-      globals: { react: "React", "react-dom": "ReactDOM" },
+      name: "<%= capName %>",
+      <% if (react) { %>globals: { react: "React", "react-dom": "ReactDOM" },<% } %>
       exports: "named"
     },
     plugins: [

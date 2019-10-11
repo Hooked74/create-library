@@ -3,6 +3,7 @@
 const Commander = require("./services/Commander");
 const ConfigManager = require("./services/ConfigManager");
 const FileManager = require("./services/FileManager");
+const FilterManager = require("./services/FilterManager");
 const ReplaceManager = require("./services/ReplaceManager");
 const chalk = require("chalk");
 const clearConsole = require("./utils/clear");
@@ -24,18 +25,13 @@ const prettyjson = require("prettyjson");
   console.log();
 
   const fileManager = new FileManager(config);
+  const filterManager = new FilterManager(config);
   const replaceManager = new ReplaceManager(config);
 
   console.log();
   info("Start copy template");
   fileManager.makeRootDir();
-  fileManager.copyTemplate((content, fileName) => {
-    content = replaceManager.replace(content);
-    if (fileName.includes("package.json")) {
-      content = replaceManager.addFilesToPackageJson(content);
-    }
-    return content;
-  });
+  fileManager.copyTemplate(filterManager.filter, replaceManager.rename, replaceManager.replace);
 
   console.log();
   info("Start repository initialization");

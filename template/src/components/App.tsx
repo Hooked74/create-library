@@ -1,3 +1,4 @@
+<% if (react) { %>
 import styled, { StyledTags } from "@emotion/styled";
 import React, { PureComponent } from "react";
 
@@ -10,3 +11,10 @@ export default class App extends PureComponent<{}, {}> {
     return <Button>Create library</Button>;
   }
 }
+<% } else { %>
+export default function App(): HTMLButtonElement {
+  const button: HTMLButtonElement = document.createElement("button");
+  button.style.color = "turquoise";
+  return button;
+}
+<% } %>

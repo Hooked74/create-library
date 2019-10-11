@@ -34,6 +34,10 @@ Transfer partial or full configuration in json format or in file format for libr
 **-f, --force** \
 Generate library with default configuration options (from *default-config.json* file).
 
+**-e, --extended** \
+
+Force you to select advanced options in the interactive menu: react, storybook, cypress. By default these options are **true**.
+
 ## Configuration
 
 The configuration has the following structure:
@@ -46,7 +50,10 @@ The configuration has the following structure:
   "email": "novikovio74@gmail.com",
   "repoAuthor": "Hooked74",
   "repoName": "my-library",
-  "typePrefix": "H74"
+  "typePrefix": "H74",
+  "react": true,
+  "storybook": true,
+  "cypress": true
 }
 ```
 
@@ -77,3 +84,15 @@ It is used to generate the full repository name in many parts of the environment
 ### **typePrefix**
 
 It is used to generate standard type namespace alias. It is necessary to avoid type intersection in a global scope. It is a optional parameter.
+
+### **react**
+
+Flag that is responsible for using React and everything related to it in the created project. Default: **true**.
+
+### **storybook**
+
+Flag that is responsible for using Storybook and everything related to it in the created project. Default: **true**.
+
+### **cypress**
+
+Flag that is responsible for using Cypress and everything related to it in the created project. Default: **true**.

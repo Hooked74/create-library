@@ -5,5 +5,8 @@
   "email": "novikovio74@gmail.com",
   "repoAuthor": "Hooked74",
   "repoName": "",
-  "typePrefix": "H74"
+  "typePrefix": "H74",
+  "react": true,
+  "storybook": true,
+  "cypress": true
 }
