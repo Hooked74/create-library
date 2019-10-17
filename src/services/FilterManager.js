@@ -7,10 +7,6 @@ module.exports = class FilterManager {
     const excludeFiles = [];
     const excludeDirs = [];
 
-    if (!this.config.react) {
-      excludeFiles.push("setupTests.js");
-    }
-
     if (!this.config.storybook) {
       excludeDirs.push(".storybook", "stories");
     }
