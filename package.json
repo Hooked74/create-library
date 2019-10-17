@@ -1,12 +1,13 @@
 {
   "name": "@hooked74/create-library",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
     "create",
     "typescript",
     "boilerplate",
+    "template",
     "rollup",
     "react"
   ],
