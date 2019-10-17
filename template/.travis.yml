@@ -13,8 +13,8 @@ before_script:
   - npm outdate
   - npm audit
 script:
-  - npm test
-  <% if (storybook && cypress) { %>- npm run test:browser:ci<% } %>
+  - npm test<% if (storybook && cypress) { %>
+  - npm run test:browser:ci<% } %>
   - npm i -g codecov
   - codecov --token="$CODECOV_TOKEN" # TODO: get token from codecov and add to travis CI env
 before_deploy:

@@ -14,7 +14,7 @@ declare type PickField<T, K extends keyof T> = T[K];
 declare type PromiseResolve = (value?: void | PromiseLike<void> | undefined) => void;
 declare type PromiseReject = (reason?: any) => void;
 
-declare type Constructor<T> = new (...args: any[]) => T;
+declare type Constructor<T extends object> = T extends object ? new (...args: any[]) => T : never;
 declare type Decorator<T, U extends T> = (Component: Constructor<T>) => Constructor<U>;
 
 declare type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
