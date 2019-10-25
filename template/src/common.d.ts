@@ -15,7 +15,7 @@ declare type PromiseResolve = (value?: void | PromiseLike<void> | undefined) => 
 declare type PromiseReject = (reason?: any) => void;
 
 declare type Constructor<T extends object> = T extends object ? new (...args: any[]) => T : never;
-declare type Decorator<T, U extends T> = (Component: Constructor<T>) => Constructor<U>;
+declare type Decorator<T extends object, U extends T> = (Component: Constructor<T>) => Constructor<U>;
 
 declare type ReadonlyPartial<T> = { readonly [P in keyof T]?: T[P] };
 declare type Writable<T> = { -readonly [K in keyof T]: T[K] };
