@@ -28,7 +28,7 @@ deploy:
       branch: master
       repo: <%= repo %>
     api_key:
-      secure: <secure key> # TODO: generate secure key: $ travis encrypt <npm token>
+      secure: <secure key> # TODO: generate secure key: $ travis encrypt <npm token><% if (storybook) { %>
   - provider: pages
     skip_cleanup: true
     github_token: $GITHUB_TOKEN # TODO: get token from github and add to travis CI env
@@ -36,4 +36,4 @@ deploy:
     local_dir: example
     on:
       branch: master
-      repo: <%= repo %>
+      repo: <%= repo %><% } %>
