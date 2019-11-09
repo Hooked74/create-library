@@ -48,15 +48,26 @@ const useTSLint = config => {
 };
 
 const useTypescript = config => {
-  const findBabelLoader = findLoader("babel");
-  for (const rule of config.module.rules) {
-    const babelLoader = findBabelLoader(rule);
-
-    if (babelLoader) {
-      rule.include = [rule.include, resolve(".storybook"), resolve("stories")];
-      rule.test = /\.(mjs|jsx?|tsx?)$/;
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    loader: require.resolve("babel-loader"),
+    include: [resolve(".storybook"), resolve("stories"), resolve("src")],
+    options: {
+      cacheDirectory: resolve("node_modules/.cache/storybook"),
+      plugins: [
+        [
+          "@babel/plugin-transform-runtime",
+          {
+            corejs: 3,
+            useESModules: false,
+            absoluteRuntime: dirname(require.resolve("@babel/runtime/package.json"))
+          }
+        ]
+      ]
     }
-  }
+  });
+
+  config.resolve.extensions.push(".ts", ".tsx");
 
   return config;
 };
