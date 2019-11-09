@@ -1,4 +1,4 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["../node_modules/cypress", "../src/common.d.ts", "*/*.ts"]
+  "include": ["../node_modules/cypress", "../src/common.d.ts", "*/*.ts", "index.d.ts"]
 }

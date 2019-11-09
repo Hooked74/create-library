@@ -29,6 +29,7 @@ describe("Squares", () => {
 
     it("The color of the square should be blue", () => {
       cy.get("div[role=button]").should("have.css", "background-color", "rgb(0, 0, 255)");
+      cy.task("log", "color is blue"); // node log
     });
   });
 });
