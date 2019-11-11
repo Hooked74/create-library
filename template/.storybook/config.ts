@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { addParameters, configure, addDecorator } from "@storybook/<%= react ? "react" : "html" %>";
+import { addDecorator, addParameters, configure } from "@storybook/<%= react ? "react" : "html" %>";
 import { create, ThemeVars } from "@storybook/theming";<% if (react) { %>
 import React from "react";<% } %>
 import { version } from "../package.json";
