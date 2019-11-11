@@ -1,4 +1,4 @@
-const { resolve } = require("path");
+const { resolve, dirname } = require("path");
 
 const findLoader = loaderName => rule => {
   if (
