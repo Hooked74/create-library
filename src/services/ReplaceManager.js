@@ -20,17 +20,17 @@ module.exports = class ReplaceManager {
 
   removeReactFromPackageJson = predicate => content => {
     if (predicate) {
-      delete content.peerDependencies;
-      content.devDependencies = omitBy(
-        content.devDependencies,
-        (_, key) =>
-          (key.includes("react") && key !== "react-scripts") ||
-          key.includes("emotion") ||
-          key.includes("styled-components") ||
-          key.includes("enzyme") ||
-          key.includes("atlaskit/theme")
-      );
+      const filterDependencies = (_, key) =>
+        (key.includes("react") && key !== "react-scripts") ||
+        key.includes("emotion") ||
+        key.includes("styled-components") ||
+        key.includes("enzyme") ||
+        key.includes("addon-info") ||
+        key.includes("atlaskit/theme");
 
+      delete content.peerDependencies;
+      content.dependencies = omitBy(content.dependencies, filterDependencies);
+      content.devDependencies = omitBy(content.devDependencies, filterDependencies);
       delete content.devDependencies["@storybook/react"];
     } else {
       delete content.devDependencies["@storybook/html"];
@@ -105,6 +105,8 @@ module.exports = class ReplaceManager {
     switch (true) {
       case !this.config.react && fileName === "global-styles.tsx":
         return "global-styles.ts";
+      case !this.config.react && fileName === "App.tsx":
+        return "App.ts";
       default:
         return fileName;
     }

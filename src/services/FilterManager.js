@@ -16,6 +16,10 @@ module.exports = class FilterManager {
       excludeDirs.push("cypress");
     }
 
+    if (!this.config.react) {
+      excludeFiles.push("Square.tsx");
+    }
+
     return isDir ? !excludeDirs.includes(fileName) : !excludeFiles.includes(fileName);
   };
 };
