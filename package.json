@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/create-library",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
@@ -35,17 +35,18 @@
     "access": "public"
   },
   "dependencies": {
+    "@hooked74/prompt": "^1.0.1",
     "chalk": "^3.0.0",
-    "commander": "^4.0.0",
-    "inquirer": "^7.0.0",
+    "commander": "^4.0.1",
     "lodash": "^4.17.15",
     "move-cli": "^1.2.1",
     "path-exists-cli": "^1.0.0",
-    "prettier": "^1.19.0",
+    "prettier": "^1.19.1",
     "prettyjson": "^1.2.1",
     "simple-output": "^2.0.0"
   },
   "scripts": {
+    "test": "node src/index.js -f && cd my-library && npm run test:browser:ci",
     "postinstall": "path-exists template/.npmignore && move-cli template/.npmignore template/.gitignore || echo \"template/.npmignore doesn't exist\""
   }
 }
