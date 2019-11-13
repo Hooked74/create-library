@@ -3,7 +3,7 @@ const {
   getAbbreviationFromString,
   splitAndCapitalize
 } = require("../utils/string");
-const { promptInput, promptConfirm } = require("../utils/prompt");
+const { promptInput, promptConfirm } = require("@hooked74/prompt");
 const chalk = require("chalk");
 
 module.exports = class ConfigBuilder {
