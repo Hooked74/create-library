@@ -1,16 +1,12 @@
 <% if (react) { %>
+// tslint:disable:jsx-no-lambda
 import { storiesOf } from "@storybook/react";
 import React from "react";
-
-const handler: Handler = () => alert("It is handler!");
+import Square from "../src/components/Square";
 
 storiesOf("Squares", module)
-  .add("red square", () => (
-    <div style={{ width: 100, height: 100, background: "red" }} onClick={handler} role="button" />
-  ))
-  .add("blue square", () => (
-    <div style={{ width: 100, height: 100, background: "blue" }} role="button" />
-  ));
+  .add("red square", () => <Square onClick={() => alert("It is handler!")} background="red" />)
+  .add("blue square", () => <Square background="blue" />);
 <% } else { %>
 import { storiesOf } from "@storybook/html";
 

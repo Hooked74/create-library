@@ -1,6 +1,7 @@
 <% if (react) { %>
 import styled, { StyledTags } from "@emotion/styled";
 import React, { PureComponent } from "react";
+import Square from "./Square";
 
 const Button: ReturnType<PickField<StyledTags<any>, "button">> = styled.button`
   color: turquoise;
@@ -8,7 +9,12 @@ const Button: ReturnType<PickField<StyledTags<any>, "button">> = styled.button`
 
 export default class App extends PureComponent<{}, {}> {
   public render(): JSX.Element {
-    return <Button>Create library</Button>;
+    return (
+      <>
+        <Button>Create library</Button>
+        <Square background="red" />
+      </>
+    );
   }
 }
 <% } else { %>

@@ -47,24 +47,35 @@ const useTSLint = config => {
   return config;
 };
 
-const useTypescript = config => {
+const useTypescript = config => {<% if (react) { %>
+  const { compilerOptions } = require(resolve(process.cwd(), "tsconfig.json"));
+  delete compilerOptions.moduleResolution;<% } %>
+
   config.module.rules.push({
     test: /\.tsx?$/,
-    loader: require.resolve("babel-loader"),
     include: [resolve(".storybook"), resolve("stories"), resolve("src")],
-    options: {
-      cacheDirectory: resolve("node_modules/.cache/storybook"),
-      plugins: [
-        [
-          "@babel/plugin-transform-runtime",
-          {
-            corejs: 3,
-            useESModules: false,
-            absoluteRuntime: dirname(require.resolve("@babel/runtime/package.json"))
-          }
-        ]
-      ]
-    }
+    use: [
+      {
+        loader: require.resolve("babel-loader"),
+        options: {
+          cacheDirectory: resolve("node_modules/.cache/storybook"),
+          plugins: [
+            [
+              "@babel/plugin-transform-runtime",
+              {
+                corejs: 3,
+                useESModules: false,
+                absoluteRuntime: dirname(require.resolve("@babel/runtime/package.json"))
+              }
+            ]
+          ]
+        }
+      }<% if (react) { %>,
+      {
+        loader: require.resolve("react-docgen-typescript-loader"),
+        options: { compilerOptions }
+      }<% } %>
+    ]
   });
 
   config.resolve.extensions.push(".ts", ".tsx");

@@ -1,4 +1,5 @@
-// tslint:disable:no-console
+// tslint:disable:no-console<% if (react) { %>
+import { withInfo } from "@storybook/addon-info";<% } %>
 import { addDecorator, addParameters, configure } from "@storybook/<%= react ? "react" : "html" %>";
 import { create, ThemeVars } from "@storybook/theming";<% if (react) { %>
 import React from "react";<% } %>
@@ -15,10 +16,11 @@ addParameters({
     // currently not using any addons
     showPanel: false,
     theme
-  }
+  },
+  info: { inline: true }
 });
 
-// Using theme would be good for this, but it looks like theme is just for the chrome around the story
+<% if (react) { %>addDecorator(withInfo as any);<% } %>
 addDecorator(GlobalStylesDecorator);
 
 // automatically import all files ending in *.stories.ts
