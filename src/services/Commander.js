@@ -1,4 +1,4 @@
-const { spawnSync } = require("child_process");
+const { execSync } = require("child_process");
 
 module.exports = class Commander {
   createProgram() {
@@ -12,12 +12,10 @@ module.exports = class Commander {
   }
 
   installPackages(cwd) {
-    const spawnProcess = spawnSync("npm", ["install"], { stdio: "inherit", cwd });
-    if (spawnProcess.error) throw spawnProcess.error;
+    execSync(`npm install`, { stdio: "inherit", cwd });
   }
 
   initRepo(cwd) {
-    const spawnProcess = spawnSync("git", ["init"], { stdio: "inherit", cwd });
-    if (spawnProcess.error) throw spawnProcess.error;
+    execSync(`git init`, { stdio: "inherit", cwd });
   }
 };
