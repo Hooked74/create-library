@@ -1,6 +1,6 @@
 {
   "name": "@hooked74/create-library",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Set up a library by running one command",
   "keywords": [
     "library",
