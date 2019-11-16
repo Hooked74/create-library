@@ -14,7 +14,7 @@ module.exports = class ReplaceManager {
   }
 
   addFilesToPackageJson(content) {
-    content.files = ["/dist"];
+    content.files = ["/dist", "tsconfig.json"];
     return content;
   }
 
