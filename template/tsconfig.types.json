@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "skipLibCheck": true,
     "allowJs": false,
     "isolatedModules": false,
     "noEmit": false,
