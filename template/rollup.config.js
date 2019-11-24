@@ -7,10 +7,10 @@ import commonjs from "rollup-plugin-commonjs";
 import resolve from "rollup-plugin-node-resolve";
 import url from "rollup-plugin-url";
 import svgr from "@svgr/rollup";
-import json from "rollup-plugin-json";
+import json from "@rollup/plugin-json";
 import { uglify } from "rollup-plugin-uglify";
-import strip from "rollup-plugin-strip";
-import replace from "rollup-plugin-replace";
+import strip from "@rollup/plugin-strip";
+import replace from "@rollup/plugin-replace";
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
 import license from "rollup-plugin-license";
 
