@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "cross-env CI=true project-tools test --bail --colors --coverage --passWithNoTests",
+    "test": "project-tools test --bail --colors --coverage --passWithNoTests",
+    "test:watch": "project-tools test --updateSnapshot",
     "test:staged": "cross-env CI=true project-tools test --bail --colors --passWithNoTests --findRelatedTests",
-    "test:watch": "project-tools test",
     "test:browser": "dotenv -- npm run test:browser:shell",
     "test:browser:ci": "dotenv -- npm run test:browser:ci:shell",
     "test:browser:shell": "cross-env-shell \"project-tools storybook test:browser:open -p $PORT\"",
