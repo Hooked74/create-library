@@ -44,6 +44,10 @@ This command allows you to run a [storybook](https://storybook.js.org/) in devel
 
 Builds the app for production. Your app is ready to be deployed.
 
+### **npm run analyze**
+
+Visualize and analyze your bundle to see which modules are taking up space.
+
 ### **npm run test:watch**
 
 Runs the test watcher in an interactive mode. By default, runs tests related to files changed since the last commit.

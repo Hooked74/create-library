@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-import { dirname } from "path";
+import { dirname, basename } from "path";
 import babel from "rollup-plugin-babel";
 import tslint from "rollup-plugin-tslint";
 import commonjs from "rollup-plugin-commonjs";
@@ -13,6 +13,7 @@ import strip from "@rollup/plugin-strip";
 import replace from "@rollup/plugin-replace";
 import { sizeSnapshot } from "rollup-plugin-size-snapshot";
 import license from "rollup-plugin-license";
+import visualizer from "rollup-plugin-visualizer";
 
 import pkg from "./package.json";
 
@@ -57,7 +58,7 @@ const commonjsArgs = {
   }
 <% } %>};
 
-export default [
+const config = [
   // Universal module definition (UMD) build
   // - including console.* statements
   {
@@ -78,35 +79,7 @@ export default [
       svgr(),
       replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
       commonjs(commonjsArgs),
-      babel(getBabelOptions({ useESModules: true })),
-      license(banner),
-      sizeSnapshot()
-    ]
-  },
-
-  // Minified UMD build
-  {
-    input,
-    output: {
-      file: "dist/<%= name %>.min.js",
-      format: "umd",
-      name: "<%= capName %>",
-      <% if (react) { %>globals: { react: "React", "react-dom": "ReactDOM" },<% } %>
-      exports: "named"
-    },
-    plugins: [
-      tslint({ throwOnError: true }),
-      resolve({ extensions }),
-      url({ exclude: ["**/*.svg"] }),
-      json(),
-      svgr(),
-      replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
-      commonjs(commonjsArgs),
-      strip({ debugger: true }),
-      babel(getBabelOptions({ useESModules: true })),
-      uglify(),
-      license(banner),
-      sizeSnapshot()
+      babel(getBabelOptions({ useESModules: true }))
     ]
   },
 
@@ -130,9 +103,7 @@ export default [
       svgr(),
       replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
       commonjs(commonjsArgs),
-      babel(getBabelOptions({ useESModules: false })),
-      license(banner),
-      sizeSnapshot()
+      babel(getBabelOptions({ useESModules: false }))
     ]
   },
 
@@ -156,9 +127,48 @@ export default [
       svgr(),
       replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
       commonjs(commonjsArgs),
-      babel(getBabelOptions({ useESModules: false })),
-      license(banner),
-      sizeSnapshot()
+      babel(getBabelOptions({ useESModules: false }))
     ]
   }
 ];
+
+if (process.env.ANALYZE === "true") {
+  config.forEach((c, i) =>
+    c.plugins.push(
+      visualizer({
+        open: true,
+        title: basename(c.output.file),
+        filename: `node_modules/.cache/analyze/bundle_${basename(c.output.file)}.html`
+      })
+    )
+  );
+} else {
+  config.unshift(
+    // Minified UMD build
+    {
+      input,
+      output: {
+        file: "dist/<%= name %>.min.js",
+        format: "umd",
+        name: "<%= capName %>",
+        <% if (react) { %>globals: { react: "React", "react-dom": "ReactDOM" },<% } %>
+        exports: "named"
+      },
+      plugins: [
+        tslint({ throwOnError: true }),
+        resolve({ extensions }),
+        url({ exclude: ["**/*.svg"] }),
+        json(),
+        svgr(),
+        replace({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
+        commonjs(commonjsArgs),
+        strip({ debugger: true }),
+        babel(getBabelOptions({ useESModules: true })),
+        uglify()
+      ]
+    }
+  );
+  config.forEach(c => c.plugins.push(license(banner), sizeSnapshot()));
+}
+
+export default config;
