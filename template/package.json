@@ -26,7 +26,7 @@
     "prettier:types": "prettier --write \"dist/**/*.d.ts\"",
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:ts": "tslint --fix -p tsconfig.json -c tslint.json",
-    "lint:css": "stylelint \"stories/**/*.{js,jsx}\"",
+    "lint:css": "stylelint \"stories/**/*.{ts,tsx}\"",
     "lint:types": "tslint --fix -p tsconfig.types.json -c tslint.compile.json \"dist/**/*.d.ts\""
   },
   "keywords": [],
@@ -159,7 +159,7 @@
       "npm run test:staged --",
       "git add"
     ],
-    "*.{json,scss,css,md}": [
+    "*.{js,jsx,json,scss,css,md}": [
       "npm run prettier --",
       "git add"
     ]
